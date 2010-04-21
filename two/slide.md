@@ -75,6 +75,12 @@
 * 15 billion page views per month
 * 50 K query per second at peak
 
+!SLIDE center 
+
+# Mixi footprint page #
+
+![ashiato](ashiato.png)
+
 !SLIDE bullets
 
 # What is MikioWare ? #
@@ -180,7 +186,7 @@
 
 ## Disk as Memory ##
 
-* Memcache your fragment cache(Ravelry)
+* Memcache your fragment cache(Ravelry, 100 mil pvpm)
 * Poor mans Memcache on VPS?
 
 !SLIDE center bullets incremental
