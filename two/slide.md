@@ -183,12 +183,10 @@
 * Memcache your fragment cache(Ravelry)
 * Poor mans Memcache on VPS?
 
-### http://tokyocabinetwiki.pbworks.com/01_CaseyForbesFromRavelry ###
-
 !SLIDE center bullets incremental
 # What's exciting about TC? #
 
-## Extensible database ##
+## Extensible database using Lua ##
 
     @@@ javascript
     function incr(key, value)
