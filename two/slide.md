@@ -180,9 +180,8 @@
 
 ## Disk as Memory ##
 
-![Ravelry](ravelry-logo.png)
-
-## "I’ve been using Tokyo Cabinet/Tyrant instead of memcached in some places for caching larger objects. We do a lot of rendering Markdown into HTML — pretty much everywhere on the site — it’s a waste of energy to render but it’s also a huge amount of data to store in memcached."  ##
+* Memcache your fragment cache(Ravelry)
+* Poor mans Memcache on VPS?
 
 ### http://tokyocabinetwiki.pbworks.com/01_CaseyForbesFromRavelry ###
 
