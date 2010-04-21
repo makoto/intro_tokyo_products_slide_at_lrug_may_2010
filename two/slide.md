@@ -5,9 +5,9 @@
 
 ### Makoto Inoue (@makoto_inoue) ###
 
-### http://new-bamboo.co.uk (@newbamboo)###
+### http://new-bamboo.co.uk (@newbamboo) ###
 
-### http://tokyocabinetwiki.pbworks.com (@tcwiki)###
+### http://tokyocabinetwiki.pbworks.com (@tcwiki) ###
 
 
 !SLIDE center 
