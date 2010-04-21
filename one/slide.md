@@ -1,10 +1,11 @@
 !SLIDE center
-## Tokyo Cabinet, Tokyo Tyrant and Kyoto Cabinet: the world of Mikio ware #
+## Tokyo Cabinet, Tokyo Tyrant and Kyoto Cabinet: the world of Mikio ware ##
 
-* Makoto Inoue (@makoto_inoue)
-* http://tokyocabinetwiki.pbworks.com
 
 ![tcw](tcw.png)
+
+### Makoto Inoue (@makoto_inoue) ###
+### http://tokyocabinetwiki.pbworks.com ###
 
 !SLIDE bullets incremental
 # Contents #
@@ -26,7 +27,7 @@
 
 # What is MikioWare ? #
 
-* Mikio Hirabayashi
+ Mikio Hirabayashi
 
 ![dragonball](imgres.jpeg)
 
@@ -38,35 +39,47 @@
 
 * 13 million members (10% of the population)
 * 2 million page views per day
-* 10 K connections(ie 10,000 QPS) at peak
+* 10 K connections(= 10,000 QPS) at peak
 
 !SLIDE bullets
 
 # What is MikioWare ? #
 
-* 2009-12-26 - **Kyoto Cabinet** (DBM)
-* 2009-08-05 - Tokyo Promenade (CMS)
-* 2008-04-20 - Tokyo Dystopia (Search)
-* 2008-01-20 - **Tokyo Tyrant** (DB Server)
-* 2007-08-12 - **Tokyo Cabinet** (DBM)
+* 2009 - **Kyoto Cabinet** (DBM)
+* 2009 - Tokyo Promenade (CMS)
+* 2008 - Tokyo Dystopia (Search)
+* 2008 - **Tokyo Tyrant** (DB Server)
+* 2007 - **Tokyo Cabinet** (DBM)
 
 !SLIDE center bullets
 
 # What is MikioWare ? #
 
-* 2005-04-16 - Hyper Estraier (Search)
-* 2003-12-24 - Estraier (Search)
-* 2003-02-08 - QDBM (DBM)
-* ?????????? - Snatcher (Search)
+* 2005 - Hyper Estraier (Search)
+* 2003 - Estraier (Search)
+* 2003 - QDBM (DBM)
+* 200? - Snatcher (Search)
 
-!SLIDE center bullets incremental
+!SLIDE center bullets
 # Tokyo Cabinet #
 
 * Space and Time efficiency
 * Multi Threaded
-* Robustness (transaction/redo log/replication)
+* Robustness
+* Easy API
 
-!SLIDE center bullets incremental
+!SLIDE center bullets
+# Tokyo Cabinet #
+
+![what_is_tc](what_is_tc.png)
+
+!SLIDE center
+# Within NoSQL world #
+
+![diagram](diagram.png)
+
+
+!SLIDE center bullets 
 # Tokyo Cabinet #
 ## Various DB Types ##
 
@@ -97,6 +110,7 @@ $ tcrmgr put localhost one first
 $ tcrmgr put localhost two second
 $ tcrmgr put localhost three third
 $ tcrmgr mget localhost one two three
+
 one	first
 two	second
 three	third
