@@ -108,7 +108,7 @@
 
 * Tokyo Cabinet = List, K-V, or Table store. Memory or File 
 * Tokyo Tyrant = Network Server (for web, memcached, http, lua)
-* Kyoto Cabinet = Sibling of TC (C++), Pluggable (Visitor model), Windows support (Today!!)
+* Kyoto Cabinet = Sibling of TC (C++), Pluggable, Windows support 
 
 !SLIDE center
 # TC - Various Data Structure
