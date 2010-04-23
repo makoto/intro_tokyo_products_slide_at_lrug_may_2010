@@ -75,7 +75,7 @@
 * 15 billion page views per month
 * 50 K query per second at peak
 
-!SLIDE center 
+!SLIDE full-page
 
 # Mixi footprint page #
 
@@ -100,7 +100,7 @@
 * 2003 - QDBM (DBM)
 * 200? - Snatcher (Search)
 
-!SLIDE center bullets
+!SLIDE full-page
 
 # What is DBM ? #
 
@@ -119,26 +119,26 @@
 !SLIDE center
 # TC - Various Data Structure
 
-!SLIDE
+!SLIDE full-page
 # TCHDB - Hash #
 
 ![TCHDB](hashdb_diagram.png)
 ![TCHCOMMAND](tchcommand2.png)
 
-!SLIDE
+!SLIDE full-page
 # TCFDB - Fixed (= Array) #
 
 ![TCFDB](fixeddb_diagram.png)
 ![TCFCOMMAND](tcfcommand.png)
 
-!SLIDE 
+!SLIDE full-page
 # TCBDB - B+ Tree
 ## dupilcate, range, forward key matching
 
 ![TCBDB](btreedb_diagram.png)
 ![TCBCOMMAND](tcbcommand.png)
 
-!SLIDE
+!SLIDE full-page
 # TCTDB - Table
 
 ![TCTDB](tabledb_diagram.png)
@@ -168,13 +168,15 @@
 * Extensible database
 * Tools, not Framework
 
-!SLIDE center bullets incremental
+!SLIDE full-page
+
 # What's exciting about TC? #
 ## Speed ##
 ### Storing 1,000,000 records ###
 ![performance_comparisons_tc](performance_comparisons_tc.png)
 ### http://1978th.net/tokyocabinet/benchmark.pdf ###
-!SLIDE center bullets incremental
+
+!SLIDE full-page
 # What's exciting about TC? #
 ## Speed ##
 ### Request Per Second for read/write 1-5,000,000 records ###
@@ -210,7 +212,7 @@
        return value
     end
 
-!SLIDE center bullets incremental
+!SLIDE full-page
 # What's exciting about TC? #
 
 ### server ###
@@ -221,7 +223,7 @@
 ### http://www.igvita.com/2009/07/13/extending-tokyo-cabinet-db-with-lua ###
 
 
-!SLIDE center bullets incremental
+!SLIDE full-page
 # What's exciting about TC? #
 
 ## Tools, not Framework ##
