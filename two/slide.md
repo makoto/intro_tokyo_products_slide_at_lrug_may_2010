@@ -5,25 +5,65 @@
 
 ### Makoto Inoue (@makoto_inoue) ###
 
-### http://new-bamboo.co.uk (@newbamboo) ###
-
 ### http://tokyocabinetwiki.pbworks.com (@tcwiki) ###
 
+!SLIDE bullets incremental
 
-!SLIDE center 
+# Who am I ? #
 
-![myNoSQL](myNoSQL.png)
-![TC Community](tc_community.png)
-
-### http://nosql.mypopescu.com ###
+* ex-DBA (MSSQL/Oracle/Sybase)
+* New Bamboo (@pandastream, @pusherapp)
+* dm-tokyo-cabinet-adapter (Don't use)
+* http://tokyocabinetwiki.pbworks.com (@tcwiki)
+* No production use yet
 
 !SLIDE bullets incremental
 # Contents #
 
+* Where is Tokyo ?
 * What is MikioWare ?
-* What is TC/TT/KC
-* What's exciting about them?
-* Interesting projects which uses TC?
+* What is TC/TT/KC ?
+* What's exciting about them ?
+* What about scaling ?
+
+!SLIDE center 
+# Where is Tokyo ?#
+
+![where is tokyo](where_is_tokyo.png)
+
+!SLIDE full-page 
+# Key - Value ?#
+
+![redis](redis.png)
+
+
+!SLIDE full-page
+# Key - Value = Hash #
+
+![TCHDB](hashdb_diagram.png)
+![TCBDB](btreedb_diagram.png)
+
+!SLIDE bullets incremental
+# Key - Value ?#
+
+* Hash index = O(1)
+* Long key, small value eg: "http://yourapp.com/products/iphone" => 1
+* Not good for range/sort (against keys)
+* Some RDBMS uses hash index for join
+
+!SLIDE full-page 
+
+# Document ?#
+
+![mongo](mongo.png)
+
+!SLIDE bullets incremental
+# Document ? #
+
+* Mainly B+Tree index = O(logN)
+* MapReduce = Can be parallelised 
+* Search by key & value
+* Can be nested {:a => {:b => 1}}
 
 !SLIDE center full-page
 
@@ -104,6 +144,8 @@
 
 # What is DBM ? #
 
+## "The father of all noSQL" ##
+
 ### 1979 - DBM
 ![Ken Thompson ](thompson01.jpeg)
 
@@ -113,8 +155,8 @@
 # What is TC/TT/KC 
 
 * Tokyo Cabinet = List, K-V, or Table store. Memory or File 
-* Tokyo Tyrant = Network Server (for web, memcached, http, lua)
-* Kyoto Cabinet = Sibling of TC (C++), Pluggable, Windows support 
+* Tokyo Tyrant = Network Server
+* Kyoto Cabinet = Sibling of TC (C++), Windows support 
 
 !SLIDE center
 # TC - Various Data Structure
@@ -124,6 +166,24 @@
 
 ![TCHDB](hashdb_diagram.png)
 ![TCHCOMMAND](tchcommand2.png)
+
+!SLIDE full-page
+# TCHDB - Hash #
+
+    @@@ ruby
+    require 'tokyo_tyrant'
+     db = TokyoTyrant::DB.new('127.0.0.1', 1978)
+
+     db['foo'] = 'Bar' # => "Bar"
+     db['foo']         # => "Bar"
+
+     db.each{ |k,v| puts [k, v].inspect }
+     # ["foo", "Bar"]
+     # => nil
+
+     db.mput("1"=>"number_1", "2"=>"number_2", "3"=>"number_3", "4"=>"number_4", "5"=>"number_5")
+     db.mget(1..3) # => {"1"=>"number_1", "2"=>"number_2", "3"=>"number_3"}
+
 
 !SLIDE full-page
 # TCFDB - Fixed (= Array) #
@@ -139,13 +199,34 @@
 ![TCBCOMMAND](tcbcommand.png)
 
 !SLIDE full-page
+# TCBDB - B+ Tree
+
+    @@@ ruby
+    require 'tokyo_tyrant'
+    bdb = TokyoTyrant::BDB.new('127.0.0.1', 1978)
+
+    bdb.putdup('foo', 'bar')
+    # => true
+
+    bdb.putlist({ 'foo' => ['baz', 'bat']})
+    # => []
+
+    bdb.getlist('foo')
+    # => {"foo"=>["bar", "baz", "bat"]}
+
+    bdb.each{ |k,v| puts [k, v].inspect }
+    # ["foo", "bar"]
+    # ["foo", "baz"]
+    # ["foo", "bat"]
+
+!SLIDE full-page
 # TCTDB - Table
 
 ![TCTDB](tabledb_diagram.png)
 ![TCTCOMMAND](tctcommand.png)
 
-!SLIDE center
-# Ruby Binding Example
+!SLIDE full-page
+# TCTDB - Table
 
     @@@ ruby
     require 'tokyo_tyrant'
@@ -160,51 +241,57 @@
       q.limit(5)
     }
 
+
+!SLIDE center
+# Ruby Bindings #
+
+### Official bindings (tokyocabinet/tokyotyrant) ###
+### * ruby-tokyotyrant ###
+### oklahoma_mixer  ###
+### rufus-tokyo(retired) ###
+
 !SLIDE center bullets incremental
 # What's exciting about them ? #
 
 * Speed
 * Disk as Memory
-* Extensible database
-* Tools, not Framework
+* Pretend, Extend, Swap
 
 !SLIDE full-page
 
-# What's exciting about TC? #
-## Speed ##
+# Speed #
 ### Storing 1,000,000 records ###
 ![performance_comparisons_tc](performance_comparisons_tc.png)
 ### http://1978th.net/tokyocabinet/benchmark.pdf ###
 
 !SLIDE full-page
-# What's exciting about TC? #
-## Speed ##
+# Speed #
 ### Request Per Second for read/write 1-5,000,000 records ###
 ![key-value-performance-3](key-value-performance-3.png)
 ### http://timyang.net/data/mcdb-tt-redis ###
 
 !SLIDE center bullets incremental
-# What's exciting about TC? #
-
-## Disk as Memory ##
+# Disk as Memory #
 
 * Memcache your fragment cache(Ravelry, 100 mil pvpm)
 * Poor mans Memcache on VPS?
 
 !SLIDE center bullets incremental
-# What's exciting about TC? #
 
-## Extensible database using Lua ##
+# Pretend #
+
+* Speaks memcached protocol
+* Speaks http protocol
+
+!SLIDE center bullets incremental
+
+# Extend (w Kyoto Tyrant Lua) #
 
     @@@ javascript
     function incr(key, value)
-       value = tonumber(value)
-       if not value then
-          return nil
-       end
        local old = tonumber(_get(key))
        if old then
-          value = value + old
+        value = value + old
        end
        if not _put(key, value) then
           return nil
@@ -212,9 +299,9 @@
        return value
     end
 
-!SLIDE full-page
-# What's exciting about TC? #
 
+!SLIDE full-page
+# Extend (w Lua) #
 ### server ###
 ![lua_incr_server](lua_incr_server.png)
 ### client ###
@@ -222,22 +309,123 @@
 
 ### http://www.igvita.com/2009/07/13/extending-tokyo-cabinet-db-with-lua ###
 
+!SLIDE full-page
+# Extend (w Kyoto Cabinet) #
+
+    @@@ ruby
+    def db.incr(keyword, number)
+      self.accept(keyword, nil, true) { |key, value|
+        new_value = key ? value.to_i + number : number
+        p new_value
+        new_value
+      }
+    end
+
+### http://1978th.net/kyotocabinet/rubydoc ###
 
 !SLIDE full-page
+
+# Swap (w C) #
+
+    @@@ c
+    #include <tcadb.h>
+    bool myopen(void *opq, const char *name){
+      return true;
+    }
+    bool myclose(void *opq){
+      return true;
+    }
+    void *myget(void *opq, const void *kbuf, int ksiz, int *sp){
+      *sp = ksiz;                    /* 戻り値のサイズを指定 */
+      return tcmemdup(kbuf, ksiz);   /* キーをコピーして返す */
+    }
+    bool initialize(ADBSKEL *skel){
+      skel->open = myopen;
+      skel->close = myclose;
+      skel->get = myget;
+      return true;
+    }
+
+!SLIDE center bullets incremental
 # What's exciting about TC? #
 
-## Tools, not Framework ##
+# Swap (w C) #
 
-![toolsets](toolsets.png)
-
-!SLIDE center bullets incremental
-# Interesting projects which uses TC? #
-
-* Distributed K-V = kumofs/ROMA
-* Queuing = Edamame (beanstalkd with persistency)
-* RDBMS = BlitzDB(Drizzle Engine)
+    $ gcc -shared -o ttskelecho.so ttskelecho.c
+    $ ttserver -skel ./ttskelecho.so
+    $ tcrmgr get localhost hello
+    hello
+    
+### http://1978th.net/tech/promenade.cgi?id=18 (Japanese) ###
 
 !SLIDE center bullets incremental
+# What about scaling ? #
+
+* ruby-tokyotyrant 
+* Kumofs
+* ROMA
+
+!SLIDE full-page
+# ruby-tokyotyrant #
+
+    @@@ruby
+     require 'tokyo_tyrant/balancer'
+     servers = ['127.0.0.1:1978',
+                '127.0.0.1:1979',
+                '127.0.0.1:1980']
+
+     tb = TokyoTyrant::Balancer::Table.new(servers)
+
+     # store server is determined by key which is consistent
+     tb[:foo] = { 'foo' => 'bar' }
+     tb[:bar] = { 'bar' => 'baz' }
+
+     # parallel_search based querying across all nodes
+     tb.find{ |q| q.condition(:foo, :streq, 'bar') }
+
+!SLIDE center bullets incremental
+# Kumofs #
+### http://github.com/etolabo/kumofs  ###
+
+* C++ (management tools written in ruby)
+* memcached compatible
+* automatic replication
+
+!SLIDE full-page
+# kumofs #
+
+![kumofs](kumofs.png)
+
+!SLIDE center bullets incremental
+# ROMA #
+### http://github.com/roma/roma ###
+
+* Written in Ruby (Matz is involved)
+* on-memory or Tokyo Cabinet
+* p2p
+
+!SLIDE full-page
+# ROMA #
+
+![roma](roma.png)
+
+!SLIDE bullets incremental
+# Conclusion #
+
+* Key Value - Document
+* DBM is the father of NoSQL
+* Performance and Scalability
+* Why should you care about NoSQL ?
+
+!SLIDE center bullets incremental
+# Studying further #
+
+* http://tokyocabinetwiki.pbworks.com
+* http://github.com/makoto/tokyo_private_teacher
+* http://github.com/makoto/try_tokyo
+
+!SLIDE full-page
+
 # Thanks!!
 
 ## Follow @tcwiki ##
