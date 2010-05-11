@@ -11,8 +11,8 @@
 
 # Who am I ? #
 
-* ex-DBA (MSSQL/Oracle/Sybase)
 * New Bamboo (@pandastream, @pusherapp)
+* ex-DBA (MSSQL/Oracle/Sybase)
 * dm-tokyo-cabinet-adapter (Don't use)
 * http://tokyocabinetwiki.pbworks.com (@tcwiki)
 * No production use yet
@@ -20,50 +20,11 @@
 !SLIDE bullets incremental
 # Contents #
 
-* Where is Tokyo ?
 * What is MikioWare ?
+* Where is Tokyo in NoSQL world?
 * What is TC/TT/KC ?
 * What's exciting about them ?
 * What about scaling ?
-
-!SLIDE center 
-# Where is Tokyo ?#
-
-![where is tokyo](where_is_tokyo.png)
-
-!SLIDE full-page 
-# Key - Value ?#
-
-![redis](redis.png)
-
-
-!SLIDE full-page
-# Key - Value = Hash #
-
-![TCHDB](hashdb_diagram.png)
-![TCBDB](btreedb_diagram.png)
-
-!SLIDE bullets incremental
-# Key - Value ?#
-
-* Hash index = O(1)
-* Long key, small value eg: "http://yourapp.com/products/iphone" => 1
-* Not good for range/sort (against keys)
-* Some RDBMS uses hash index for join
-
-!SLIDE full-page 
-
-# Document ?#
-
-![mongo](mongo.png)
-
-!SLIDE bullets incremental
-# Document ? #
-
-* Mainly B+Tree index = O(logN)
-* MapReduce = Can be parallelised 
-* Search by key & value
-* Can be nested {:a => {:b => 1}}
 
 !SLIDE center full-page
 
@@ -144,11 +105,48 @@
 
 # What is DBM ? #
 
-## "The father of all noSQL" ##
+## "noSQL, I am your father..." ##
 
 ### 1979 - DBM
 ![Ken Thompson ](thompson01.jpeg)
 
+!SLIDE center 
+# Where is Tokyo in NoSQL world? #
+
+![where is tokyo](where_is_tokyo.png)
+
+!SLIDE full-page 
+# Key - Value ?#
+
+![redis](redis.png)
+
+!SLIDE full-page
+# Key - Value = Hash #
+
+![TCHDB](hashdb_diagram.png)
+![TCBDB](btreedb_diagram.png)
+
+!SLIDE bullets incremental
+# Key - Value ?#
+
+* Hash index = O(1)
+* Long key, small value eg: "http://yourapp.com/products/iphone" => 1
+* Not good for range/sort (against keys)
+* Some RDBMS uses hash index for join
+
+!SLIDE full-page 
+
+# Document ?#
+
+![mongo](mongo.png)
+
+!SLIDE bullets incremental
+# Document ? #
+
+* Mainly B+Tree index = O(logN)
+* MapReduce = Can be parallelised 
+* Search by key & value
+* Can be nested {:a => {:b => 1}}
 
 !SLIDE center bullets incremental
 
@@ -275,6 +273,8 @@
 
 * Memcache your fragment cache(Ravelry, 100 mil pvpm)
 * Poor mans Memcache on VPS?
+* Temporary store for your batch job
+* (http://github.com/jubos/meguro)
 
 !SLIDE center bullets incremental
 
@@ -321,6 +321,17 @@
       }
     end
 
+!SLIDE full-page
+# Extend (w Kyoto Cabinet) #
+
+    @@@
+    irb(main):209:0> db.incr("foo",1)
+    2
+    => true
+    irb(main):227:0> db.echo("hello")
+    "hello"
+    => true
+    
 ### http://1978th.net/kyotocabinet/rubydoc ###
 
 !SLIDE full-page
@@ -391,11 +402,6 @@
 * memcached compatible
 * automatic replication
 
-!SLIDE full-page
-# kumofs #
-
-![kumofs](kumofs.png)
-
 !SLIDE center bullets incremental
 # ROMA #
 ### http://github.com/roma/roma ###
@@ -405,8 +411,9 @@
 * p2p
 
 !SLIDE full-page
-# ROMA #
+# Kumofs vs ROMA #
 
+![kumofs](kumofs.png)
 ![roma](roma.png)
 
 !SLIDE bullets incremental
