@@ -134,7 +134,7 @@
 
 # What is TC/TT/KC 
 
-* Tokyo Cabinet = List, K-V, or Table store. Memory or File 
+* Tokyo Cabinet = Key-Value, or Document. Memory or File 
 * Tokyo Tyrant = Network Server
 * Kyoto Cabinet = Sibling of TC (C++), Windows support 
 
@@ -235,14 +235,9 @@
 
 * Speed
 * Disk as Memory
-* Pretend, Extend, Swap
+* BYO with Swap, Extend, Override
 
 !SLIDE full-page
-
-# Speed #
-### Storing 1,000,000 records ###
-![performance_comparisons_tc](performance_comparisons_tc.png)
-### http://1978th.net/tokyocabinet/benchmark.pdf ###
 
 !SLIDE full-page
 # Speed #
@@ -260,14 +255,13 @@
 
 !SLIDE center bullets incremental
 
-# Pretend #
+# Swap #
 
-* Speaks memcached protocol
-* Speaks http protocol
+* Speaks memcached and http protocol
 
 !SLIDE center bullets incremental
 
-# Extend (w Kyoto Tyrant Lua) #
+# Extend (w Tokyo Tyrant Lua) #
 
     @@@ javascript
     function incr(key, value)
@@ -283,7 +277,7 @@
 
 
 !SLIDE full-page
-# Extend (w Lua) #
+# Extend (w Tokyo Tyrant Lua) #
 ### server ###
 ![lua_incr_server](lua_incr_server.png)
 ### client ###
@@ -318,7 +312,7 @@
 
 !SLIDE full-page
 
-# Swap (w C) #
+# Override (w C) #
 
     @@@ c
     #include <tcadb.h>
@@ -342,7 +336,7 @@
 !SLIDE center bullets incremental
 # What's exciting about TC? #
 
-# Swap (w C) #
+# Override (w C) #
 
     $ gcc -shared -o ttskelecho.so ttskelecho.c
     $ ttserver -skel ./ttskelecho.so
@@ -402,7 +396,6 @@
 # Conclusion #
 
 * Key Value - Document
-* DBM is the father of NoSQL
 * Performance and Scalability
 * Why should you care about NoSQL ?
 
