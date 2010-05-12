@@ -92,24 +92,6 @@
 * 2008 - **Tokyo Tyrant** (DB Server)
 * 2007 - **Tokyo Cabinet** (DBM)
 
-!SLIDE center bullets
-
-# What is MikioWare ? #
-
-* 2005 - Hyper Estraier (Search)
-* 2003 - Estraier (Search)
-* 2003 - QDBM (DBM)
-* 200? - Snatcher (Search)
-
-!SLIDE full-page
-
-# What is DBM ? #
-
-## "noSQL, I am your father..." ##
-
-### 1979 - DBM
-![Ken Thompson ](thompson01.jpeg)
-
 !SLIDE center 
 # Where is Tokyo in NoSQL world? #
 
