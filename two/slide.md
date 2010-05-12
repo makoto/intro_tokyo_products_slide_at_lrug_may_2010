@@ -3,6 +3,8 @@
 
 ![tcw](tcw.png)
 
+### LRUG May 2010 ###
+
 ### Makoto Inoue (@makoto_inoue) ###
 
 ### http://tokyocabinetwiki.pbworks.com (@tcwiki) ###
