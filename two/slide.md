@@ -135,7 +135,7 @@
 # What is TC/TT/KC 
 
 * Tokyo Cabinet = Key-Value, or Document. Memory or File 
-* Tokyo Tyrant = Network Server
+* Tokyo Tyrant = Network Server (w memcached/http protocol support)
 * Kyoto Cabinet = Sibling of TC (C++), Windows support 
 
 !SLIDE center
@@ -235,7 +235,7 @@
 
 * Speed
 * Disk as Memory
-* BYO with Swap, Extend, Override
+* Extend
 
 !SLIDE full-page
 
@@ -253,11 +253,6 @@
 * Temporary store for your batch job
 * (http://github.com/jubos/meguro)
 
-!SLIDE center bullets incremental
-
-# Swap #
-
-* Speaks memcached and http protocol
 
 !SLIDE center bullets incremental
 
@@ -309,41 +304,6 @@
     => true
     
 ### http://1978th.net/kyotocabinet/rubydoc ###
-
-!SLIDE full-page
-
-# Override (w C) #
-
-    @@@ c
-    #include <tcadb.h>
-    bool myopen(void *opq, const char *name){
-      return true;
-    }
-    bool myclose(void *opq){
-      return true;
-    }
-    void *myget(void *opq, const void *kbuf, int ksiz, int *sp){
-      *sp = ksiz;                    /* 戻り値のサイズを指定 */
-      return tcmemdup(kbuf, ksiz);   /* キーをコピーして返す */
-    }
-    bool initialize(ADBSKEL *skel){
-      skel->open = myopen;
-      skel->close = myclose;
-      skel->get = myget;
-      return true;
-    }
-
-!SLIDE center bullets incremental
-# What's exciting about TC? #
-
-# Override (w C) #
-
-    $ gcc -shared -o ttskelecho.so ttskelecho.c
-    $ ttserver -skel ./ttskelecho.so
-    $ tcrmgr get localhost hello
-    hello
-    
-### http://1978th.net/tech/promenade.cgi?id=18 (Japanese) ###
 
 !SLIDE center bullets incremental
 # What about scaling ? #
