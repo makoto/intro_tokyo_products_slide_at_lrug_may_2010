@@ -235,7 +235,7 @@
 
 * Speed
 * Disk as Memory
-* Extend
+* Extendable
 
 !SLIDE full-page
 
@@ -256,7 +256,7 @@
 
 !SLIDE center bullets incremental
 
-# Extend (w Tokyo Tyrant Lua) #
+# Extendable (Tokyo Tyrant Lua) #
 
     @@@ javascript
     function incr(key, value)
@@ -272,7 +272,7 @@
 
 
 !SLIDE full-page
-# Extend (w Tokyo Tyrant Lua) #
+# Extendable (Tokyo Tyrant Lua) #
 ### server ###
 ![lua_incr_server](lua_incr_server.png)
 ### client ###
@@ -281,7 +281,7 @@
 ### http://www.igvita.com/2009/07/13/extending-tokyo-cabinet-db-with-lua ###
 
 !SLIDE full-page
-# Extend (w Kyoto Cabinet) #
+# Extendable (Kyoto Cabinet) #
 
     @@@ ruby
     def db.incr(keyword, number)
