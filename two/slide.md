@@ -149,7 +149,7 @@
 ![TCHDB](hashdb_diagram.png)
 ![TCHCOMMAND](tchcommand2.png)
 
-!SLIDE center
+!SLIDE code
 # TCHDB - Hash #
 
     @@@ ruby
@@ -180,7 +180,7 @@
 ![TCBDB](btreedb_diagram.png)
 ![TCBCOMMAND](tcbcommand.png)
 
-!SLIDE center
+!SLIDE code
 # TCBDB - B+ Tree
 
     @@@ ruby
@@ -207,7 +207,7 @@
 ![TCTDB](tabledb_diagram.png)
 ![TCTCOMMAND](tctcommand.png)
 
-!SLIDE center
+!SLIDE code
 # TCTDB - Table
 
     @@@ ruby
@@ -256,7 +256,7 @@
 * (http://github.com/jubos/meguro)
 
 
-!SLIDE center
+!SLIDE code
 
 # Extendable (Tokyo Tyrant Lua) #
 
@@ -282,7 +282,7 @@
 
 ### http://www.igvita.com/2009/07/13/extending-tokyo-cabinet-db-with-lua ###
 
-!SLIDE center
+!SLIDE code
 # Extendable (Kyoto Cabinet) #
 
     @@@ ruby
@@ -294,7 +294,7 @@
       }
     end
 
-!SLIDE center
+!SLIDE code
 # Extend (w Kyoto Cabinet) #
 
     @@@
@@ -314,7 +314,7 @@
 * Kumofs
 * ROMA
 
-!SLIDE full-page
+!SLIDE code
 # ruby-tokyotyrant #
 
     @@@ruby
